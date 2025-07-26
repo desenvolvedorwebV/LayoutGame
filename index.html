@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Layout Ajustado</title>
+  <title>Jogo Aventura</title>
   <style>
     :root {
       --gap: 4px;
@@ -39,7 +39,7 @@
       height: 6vh;
     }
 
-    .linha1 div, .linha2 div {
+    .linha1_div, .linha2_div {
       flex: 1;
       border: 2px solid black;
       display: flex;
@@ -57,29 +57,177 @@
     }
 
     #div8 {
-      height: 8vh;
+      height: 10vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     #div9 {
       height: 18vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .controls1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .controls2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+  
+  .controls3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .control-button {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      background-color: #21CBCA;
+      box-shadow: none;
+      outline: none;
+      border: 3px solid black;
+    }
+  
+    .control-button2 {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: none;
+      outline: none;
+      border: 3px solid black;
+    }
+
+    .grupo-info {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 1em;
+      font-weight: 500;
+    }
+
+    .grupo-info-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px;
+    }
+
+    .grupo-horario {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-grow: 1;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      cursor: pointer;
+    }
+
+    #barra-container {
+      position: relative;
+      flex-grow: 1;
+      height: 12px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      min-width: 100px;
+    }
+
+    #barra-progresso {
+      height: 100%;
+      width: 0%;
+      transition: width 0.2s linear, background-color 0.3s ease;
+      border-radius: 20px;
+    }
+
+    #hora-visivel {
+      font-weight: 500;
+      min-width: 55px;
+      text-align: left;
     }
   </style>
 </head>
 <body>
   <div id="container">
     <div class="linha linha1">
-      <div id="div1">1</div>
-      <div id="div2">2</div>
-      <div id="div3">3</div>
+      <div class="linha1_div" id="div2">
+        <div class="grupo-info-container">
+          <div class="grupo-info" id="grupo-ano">
+            <img class="icon" src="ano.png" alt="Ano" />
+            <span id="ano-texto">000</span>
+          </div>
+          <div class="grupo-info" id="grupo-dia">
+            <img class="icon" src="dia.png" alt="Dia" />
+            <span id="dia-texto">000</span>
+          </div>
+        </div>
+      </div>
+      <div class="linha1_div" id="div3">
+        <div class="grupo-horario">
+          <img class="icon" id="emoji-img" src="noite.png" alt="Emoji" />
+          <span id="hora-visivel">06:40</span>
+          <div id="barra-container">
+            <div id="barra-progresso"></div>
+          </div>
+          <div class="grupo-info">
+            <img id="btn-velocidade" class="icon" src="vel10min.png" alt="Velocidade" title="Clique para mudar a velocidade"/>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="linha linha2">
-      <div id="div4">4</div>
-      <div id="div5">5</div>
-      <div id="div6">6</div>
+      <div class="linha2_div" id="div4">4</div>
+      <div class="linha2_div" id="div5">5</div>
+      <div class="linha2_div" id="div6">6</div>
     </div>
+
     <div id="div7">7</div>
-    <div id="div8">8</div>
-    <div id="div9">9</div>
+    <div id="div8">
+      <div class="controls3">
+        <button id="idioma" class="control-button2">
+          <img id="idioma-img" src="portugues.png" style="width: 100%; height: 100%;" />
+        </button>
+      </div>
+    </div>
+
+    <div id="div9">
+      <div class="controls1">
+        <button id="up" class="control-button">
+          <img src="botaoCima.png" alt="↑" style="width: 100%; height: 100%;" />
+        </button>
+      </div>
+      <div class="controls2">
+        <button id="left" class="control-button">
+          <img src="botaoEsquerda.png" alt="←" style="width: 100%; height: 100%;" />
+        </button>
+        <button id="down" class="control-button">
+          <img src="botaoBaixo.png" alt="↓" style="width: 100%; height: 100%;" />
+        </button>
+        <button id="right" class="control-button">
+          <img src="botaoDireita.png" alt="→" style="width: 100%; height: 100%;" />
+        </button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -93,6 +241,111 @@
 
     window.addEventListener("load", ajustarDiv7);
     window.addEventListener("resize", ajustarDiv7);
+
+    const velocidades = [
+      { valor: 10, icone: "vel10min.png" },
+      { valor: 20, icone: "vel20min.png" },
+      { valor: 30, icone: "vel30min.png" },
+      { valor: 40, icone: "vel40min.png" },
+      { valor: 50, icone: "vel50min.png" },
+      { valor: 60, icone: "vel60min.png" }
+    ];
+
+    let indiceVelocidade = 0;
+    let velocidade = velocidades[indiceVelocidade].valor;
+    let minutosTotais = 0;
+    const intervaloReal = 1000;
+    let ultimoPeriodo = "";
+    let ultimoDia = -1;
+
+    const btnVelocidade = document.getElementById("btn-velocidade");
+
+    btnVelocidade.addEventListener("click", () => {
+      indiceVelocidade = (indiceVelocidade + 1) % velocidades.length;
+      velocidade = velocidades[indiceVelocidade].valor;
+      btnVelocidade.src = velocidades[indiceVelocidade].icone;
+      console.log(`🚀 Velocidade alterada para ${velocidade / 10}x`);
+    });
+
+    function atualizarTempo() {
+      minutosTotais += velocidade;
+
+      const dias = Math.floor(minutosTotais / (24 * 60));
+      const minutosDoDia = minutosTotais % (24 * 60);
+      const horas = Math.floor(minutosDoDia / 60);
+      const minutos = minutosDoDia % 60;
+
+      const horarioTexto = `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}`;
+      document.getElementById("hora-visivel").textContent = horarioTexto;
+      document.getElementById("dia-texto").textContent = dias.toString().padStart(3, "0");
+
+      const percentual = (minutosDoDia / 1440) * 100;
+      const barra = document.getElementById("barra-progresso");
+      const emojiImg = document.getElementById("emoji-img");
+
+      if (horas >= 6 && horas < 12) {
+        barra.style.backgroundColor = "#FFD700";
+        emojiImg.src = "manha.png";
+        if (ultimoPeriodo !== "manha") {
+          console.log(`🌅 Manhã começou: ${horarioTexto}`);
+          ultimoPeriodo = "manha";
+        }
+      } else if (horas >= 12 && horas < 18) {
+        barra.style.backgroundColor = "#FFA500";
+        emojiImg.src = "tarde.png";
+        if (ultimoPeriodo !== "tarde") {
+          console.log(`🌞 Tarde começou: ${horarioTexto}`);
+          ultimoPeriodo = "tarde";
+        }
+      } else {
+        barra.style.backgroundColor = "#6A5ACD";
+        emojiImg.src = "noite.png";
+        if (ultimoPeriodo !== "noite") {
+          console.log(`🌙 Noite começou: ${horarioTexto}`);
+          ultimoPeriodo = "noite";
+        }
+      }
+
+      barra.style.width = `${percentual}%`;
+
+      if (dias !== ultimoDia) {
+        console.log(`🗓️ Novo dia começou: Dia ${dias}`);
+        ultimoDia = dias;
+      }
+    }
+
+    setInterval(atualizarTempo, intervaloReal);
+  const idiomas = [
+  {
+    nome: "portugues",
+    icone: "portugues.png",
+    dia: "dia.png",
+    ano: "ano.png"
+  },
+  {
+    nome: "ingles",
+    icone: "ingles.png",
+    dia: "day.png",
+    ano: "year.png"
+  }
+];
+
+let indiceIdioma = 0;
+
+const idiomaImg = document.getElementById("idioma-img");
+const imgDia = document.querySelector('#grupo-dia img');
+const imgAno = document.querySelector('#grupo-ano img');
+
+document.getElementById("idioma").addEventListener("click", () => {
+  indiceIdioma = (indiceIdioma + 1) % idiomas.length;
+  const idiomaAtual = idiomas[indiceIdioma];
+
+  idiomaImg.src = idiomaAtual.icone;
+  imgDia.src = idiomaAtual.dia;
+  imgAno.src = idiomaAtual.ano;
+
+  console.log(`🌐 Idioma alterado para ${idiomaAtual.nome}`);
+});
   </script>
 </body>
 </html>
