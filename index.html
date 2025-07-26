@@ -285,21 +285,21 @@
 
       if (horas >= 6 && horas < 12) {
         barra.style.backgroundColor = "#FFD700";
-        emojiImg.src = "manha.png";
+        emojiImg.src = "/imagens/manha.png";
         if (ultimoPeriodo !== "manha") {
           console.log(`🌅 Manhã começou: ${horarioTexto}`);
           ultimoPeriodo = "manha";
         }
       } else if (horas >= 12 && horas < 18) {
         barra.style.backgroundColor = "#FFA500";
-        emojiImg.src = "tarde.png";
+        emojiImg.src = "imagens/tarde.png";
         if (ultimoPeriodo !== "tarde") {
           console.log(`🌞 Tarde começou: ${horarioTexto}`);
           ultimoPeriodo = "tarde";
         }
       } else {
         barra.style.backgroundColor = "#6A5ACD";
-        emojiImg.src = "noite.png";
+        emojiImg.src = "imagens/noite.png";
         if (ultimoPeriodo !== "noite") {
           console.log(`🌙 Noite começou: ${horarioTexto}`);
           ultimoPeriodo = "noite";
