@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout Ajustado</title>
+  <style>
+    :root {
+      --gap: 4px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    #container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      padding: var(--gap);
+    }
+
+    .linha {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--gap);
+    }
+
+    .linha1, .linha2 {
+      height: 6vh;
+    }
+
+    .linha1 div, .linha2 div {
+      flex: 1;
+      border: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #div7 {
+      width: 100%;
+      border: 2px solid black;
+    }
+
+    #div8, #div9 {
+      border: 2px solid black;
+    }
+
+    #div8 {
+      height: 8vh;
+    }
+
+    #div9 {
+      flex: 1; /* ocupa espaço restante */
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="linha linha1">
+      <div id="div1">1</div>
+      <div id="div2">2</div>
+      <div id="div3">3</div>
+    </div>
+    <div class="linha linha2">
+      <div id="div4">4</div>
+      <div id="div5">5</div>
+      <div id="div6">6</div>
+    </div>
+    <div id="div7">7</div>
+    <div id="div8">8</div>
+    <div id="div9">9</div>
+  </div>
+
+  <script>
+    function ajustarDiv7() {
+      const div7 = document.getElementById("div7");
+      const width = window.innerWidth 
+                  - (parseFloat(getComputedStyle(document.body).paddingLeft) * 2 || 0) 
+                  - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) || 0) * 2;
+      div7.style.height = width + "px";
+    }
+
+    window.addEventListener("load", ajustarDiv7);
+    window.addEventListener("resize", ajustarDiv7);
+  </script>
+</body>
+</html>
